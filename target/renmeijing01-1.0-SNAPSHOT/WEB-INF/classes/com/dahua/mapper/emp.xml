@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.dahua.mapper.EmpMapper">
+    
+    <resultMap id="list" type="com.dahua.pojo.Emp">
+        <result column="id"></result>
+        <result column="ename"></result>
+        <result column="job"></result>
+        <result column="salary"></result>
+        <result column="dname"></result>
+    </resultMap>
+
+    <select id="listemps" resultType="com.dahua.pojo.Emp">
+        SELECT
+        e.id,e.ename,e.job,e.salary,d.dname
+        from
+        empinfo e, dept d
+        where
+         e.did=d.did
+        and
+        e.isdel=0;
+    </select>
+
+    <insert id="addEmp" parameterType="com.dahua.pojo.Emp">
+        insert into
+         empinfo
+         (id,did,ename,job,salary,isdel)
+          VALUES
+          (
+          #{id},
+          #{did},
+          #{ename},
+          #{job},
+          #{salary},
+          #{isdel}
+          )
+    </insert>
+
+</mapper>
